@@ -6,8 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class createProductRequestDTO {
-    private String productName;
-    private String productDescription;
-    private int productPrice;
-    private String productCategory;
+    private String title;
+    private String description;
+    private double price;
+    private String image;
+    private String category;
 }
