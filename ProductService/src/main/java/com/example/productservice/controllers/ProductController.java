@@ -3,6 +3,8 @@ package com.example.productservice.controllers;
 import com.example.productservice.DTOs.createProductRequestDTO;
 import com.example.productservice.models.Product;
 import com.example.productservice.services.ProductService;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +23,10 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    public Product getProductById(@PathVariable("id") int id) {
-        return productService.getProduct(id);
+    public ResponseEntity<Product> getProductById(@PathVariable("id") long id) {
+        Product p = productService.getProduct(id);
+        ResponseEntity<Product> response = new ResponseEntity<>(p, HttpStatusCode.valueOf(200));
+        return response;
     }
 
     @PostMapping("/products")

@@ -3,6 +3,7 @@ package com.example.productservice.services;
 import com.example.productservice.DTOs.FakeProductDTO;
 import com.example.productservice.DTOs.createProductRequestDTO;
 import com.example.productservice.models.Product;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,7 +31,8 @@ public class FakeStoreProduct implements ProductService {
 
     @Override
     public Product getProduct(long id) {
-        FakeProductDTO fakeProductDTO = restTemplate.getForObject("https://fakestoreapi.com/products/" + id, FakeProductDTO.class);
+        ResponseEntity<FakeProductDTO> fakeProductDTOResponseEntity = restTemplate.getForEntity("https://fakestoreapi.com/products/" + id, FakeProductDTO.class);
+        FakeProductDTO fakeProductDTO = fakeProductDTOResponseEntity.getBody();
         return fakeProductDTO.toProduct();
     }
 
